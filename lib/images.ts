@@ -226,8 +226,8 @@ export const images = {
 
   sectors: {
     government: {
-      src: unsplash("photo-1541872703-74c5e44368f9", 1200),
-      alt: "Government administrative building",
+      src: photo.pickup,
+      alt: "AD Meliora branded pickup on site for a government infrastructure project",
     } satisfies SiteImage,
     localAuthorities: {
       src: unsplash("photo-1519501025264-65ba15a82390", 1200),
