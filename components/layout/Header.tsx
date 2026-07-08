@@ -48,7 +48,7 @@ export default function Header() {
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 flex items-center transition-[height,background-color,box-shadow,border-color] duration-[350ms] ease-out",
+          "fixed inset-x-0 top-0 z-50 flex items-stretch transition-[height,background-color,box-shadow,border-color] duration-[350ms] ease-out",
           scrolled ? "h-[62px]" : "h-[78px]",
           isSolid
             ? "border-b border-navy/10 bg-white/92 shadow-[0_6px_24px_-12px_rgba(11,33,73,0.35)] backdrop-blur-lg backdrop-saturate-150"
