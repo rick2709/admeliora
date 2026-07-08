@@ -6,34 +6,40 @@ export type Hub = {
   description: string;
   href: string;
   image: { src: string; alt: string };
+  badge?: string;
 };
 
 export const homeHubs: Hub[] = [
   {
     id: "eom",
     title: "Engineering, Operations & Maintenance",
-    description: "Full-lifecycle engineering delivery from design through to running-asset maintenance.",
+    description:
+      "Full-lifecycle engineering plus plant operations, equipment upkeep and shutdown maintenance.",
     href: "/services#operations-maintenance",
-    image: images.plant.conveyor,
+    image: images.hero.whatWeDo,
   },
   {
     id: "water",
     title: "Water Treatment Plant O&M",
-    description: "Filtration, dosing, UV and SCADA-monitored potable water systems.",
+    description:
+      "Filtration, dosing, UV and SCADA-monitored potable water systems, operated to spec.",
     href: "/services#water-treatment",
     image: images.water.treatmentPlant,
+    badge: "Differentiator",
   },
   {
     id: "epcm",
     title: "Project Management (EPCM)",
-    description: "Engineering, Procurement, Construction Management — single-point accountability.",
+    description:
+      "Planning, scheduling, contract administration and cost control under one accountable team.",
     href: "/services#project-management",
-    image: images.hero.whatWeDo,
+    image: images.plant.refinery,
   },
   {
     id: "supplies",
     title: "Industrial & Hardware Supplies",
-    description: "Roofing, electrical, plumbing, pumps, mechanical and building materials.",
+    description:
+      "Roofing, electrical & solar, pumps, plumbing, mechanical spares, power tools and building materials.",
     href: "/products",
     image: images.hardware.buildingMaterials,
   },

@@ -115,7 +115,7 @@ export default function ServicesPage() {
             </RevealItem>
           </SectionReveal>
 
-          <SectionReveal className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <SectionReveal className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {epcmPillars.map((pillar) => (
               <RevealItem
                 key={pillar.letter}

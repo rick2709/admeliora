@@ -58,5 +58,17 @@ export const sectors: Sector[] = [
   },
 ];
 
+export const sectorMarqueeItems = [
+  "Government",
+  "Local Authorities",
+  "Energy & Power",
+  "Water & Sanitation",
+  "Mining",
+  "Oil & Gas",
+  "Manufacturing",
+  "Commercial",
+  "Residential",
+];
+
 export const sectorFocusNote =
   "Our primary focus is corporate clients, alongside government and NGOs, with individual clients served as a secondary priority.";

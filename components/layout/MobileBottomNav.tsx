@@ -25,14 +25,8 @@ export default function MobileBottomNav() {
     lastY.current = window.scrollY;
     const onScroll = () => {
       const y = window.scrollY;
-      const diff = y - lastY.current;
-      if (y < 60) {
-        setHidden(false);
-      } else if (diff > 8) {
-        setHidden(true);
-      } else if (diff < -8) {
-        setHidden(false);
-      }
+      const goingDown = y > lastY.current && y > 260;
+      setHidden(goingDown);
       lastY.current = y;
     };
     window.addEventListener("scroll", onScroll, { passive: true });
@@ -46,50 +40,61 @@ export default function MobileBottomNav() {
     <motion.nav
       aria-label="Mobile primary"
       initial={false}
-      animate={{ y: hidden ? "110%" : 0 }}
-      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-      className="pb-safe fixed inset-x-0 bottom-0 z-40 border-t border-black/5 bg-white/85 backdrop-blur-lg md:hidden"
+      animate={{ y: hidden ? "120%" : 0 }}
+      transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      className="fixed inset-x-0 bottom-0 z-[1050] flex items-end justify-around border-t border-navy/10 bg-white/90 shadow-[0_-6px_24px_-12px_rgba(11,33,73,0.3)] backdrop-blur-lg backdrop-saturate-150 md:hidden"
+      style={{ paddingBottom: "calc(8px + env(safe-area-inset-bottom))" }}
     >
-      <ul className="flex items-stretch justify-between px-1">
-        {bottomNavItems.map((item) => {
-          const Icon = icons[item.icon];
-          const active = isActive(item.href);
-          const isContact = item.icon === "contact";
+      {bottomNavItems.map((item) => {
+        const Icon = icons[item.icon];
+        const active = isActive(item.href);
+        const isContact = item.icon === "contact";
 
+        if (isContact) {
           return (
-            <li key={item.href} className="flex-1">
-              <Link
-                href={item.href}
-                aria-current={active ? "page" : undefined}
-                className="flex flex-col items-center justify-center gap-0.5 py-2.5 min-h-[52px]"
+            <Link
+              key={item.href}
+              href={item.href}
+              aria-current={active ? "page" : undefined}
+              className="flex min-w-0 flex-1 flex-col items-center gap-0.5 px-1 pt-1.5 pb-1"
+            >
+              <motion.span
+                whileTap={{ scale: 0.9 }}
+                transition={{ type: "spring", stiffness: 400, damping: 15 }}
+                className="-mt-[22px] flex h-[46px] w-[46px] items-center justify-center rounded-full border-[3px] border-white bg-accent shadow-[0_8px_20px_-4px_rgba(30,107,230,0.6)]"
               >
-                <motion.span
-                  whileTap={{ scale: 0.85 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 15 }}
-                  className={cn(
-                    "flex h-9 w-9 items-center justify-center rounded-full transition-colors",
-                    isContact
-                      ? "bg-accent text-white"
-                      : active
-                      ? "bg-accent/10 text-accent"
-                      : "text-steel"
-                  )}
-                >
-                  <Icon size={19} strokeWidth={2.25} />
-                </motion.span>
-                <span
-                  className={cn(
-                    "text-[10.5px] font-medium",
-                    active ? "text-accent" : "text-steel/80"
-                  )}
-                >
-                  {item.label}
-                </span>
-              </Link>
-            </li>
+                <Icon size={22} strokeWidth={2} className="text-white" />
+              </motion.span>
+              <span className="text-[10px] font-bold font-heading text-accent">
+                {item.label}
+              </span>
+            </Link>
           );
-        })}
-      </ul>
+        }
+
+        return (
+          <Link
+            key={item.href}
+            href={item.href}
+            aria-current={active ? "page" : undefined}
+            className="flex min-h-[52px] min-w-0 flex-1 flex-col items-center justify-center gap-1 py-2.5"
+          >
+            <Icon
+              size={23}
+              strokeWidth={2}
+              className={cn(active ? "text-accent" : "text-[#6a7793]")}
+            />
+            <span
+              className={cn(
+                "text-[10px] font-semibold font-heading",
+                active ? "text-accent" : "text-[#6a7793]"
+              )}
+            >
+              {item.label}
+            </span>
+          </Link>
+        );
+      })}
     </motion.nav>
   );
 }

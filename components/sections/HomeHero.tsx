@@ -3,22 +3,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 import { images } from "@/lib/images";
-import { siteConfig } from "@/lib/site";
 import { easeOut } from "@/lib/motion";
 
-const headline = "WE DELIVER REGARDLESS".split(" ");
+const line1 = ["We", "Deliver"];
+const line2 = ["Regardless."];
+
+function HeroWord({ word, index }: { word: string; index: number }) {
+  return (
+    <motion.span
+      initial={{ opacity: 0, y: "0.4em" }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, delay: 0.15 + index * 0.13, ease: easeOut }}
+      className="inline-block"
+    >
+      {word}
+    </motion.span>
+  );
+}
 
 export function HomeHero() {
   return (
-    <section className="relative flex min-h-[94vh] items-end overflow-hidden bg-navy-dark">
-      <motion.div
-        initial={{ scale: 1.15 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 14, ease: "linear" }}
-        className="absolute inset-0"
-      >
+    <section className="relative flex min-h-screen items-center overflow-hidden text-white">
+      <div className="absolute inset-0 motion-safe:animate-[ami-kenburns_22s_ease-in-out_infinite_alternate]">
         <Image
           src={images.hero.home.src}
           alt={images.hero.home.alt}
@@ -27,61 +34,109 @@ export function HomeHero() {
           sizes="100vw"
           className="object-cover"
         />
-      </motion.div>
-      <div className="absolute inset-0 bg-gradient-to-t from-navy-dark via-navy-dark/70 to-navy-dark/30" />
-      <div className="absolute inset-0 bg-gradient-to-r from-navy-dark/80 via-navy-dark/20 to-transparent" />
+      </div>
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "linear-gradient(105deg, rgba(11,33,73,.94) 0%, rgba(11,33,73,.78) 42%, rgba(11,33,73,.42) 100%)",
+        }}
+      />
+      <div
+        className="absolute inset-0"
+        style={{ background: "linear-gradient(to top, rgba(11,33,73,.9), transparent 40%)" }}
+      />
 
-      <div className="relative mx-auto w-full max-w-7xl px-6 pb-20 pt-40 sm:px-8 sm:pb-28">
-        <h1 className="font-heading text-4xl font-extrabold leading-[1.05] text-white sm:text-6xl lg:text-7xl">
-          {headline.map((word, i) => (
-            <motion.span
-              key={word}
-              initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              transition={{ duration: 0.6, delay: 0.3 + i * 0.12, ease: easeOut }}
-              className="mr-4 inline-block"
-            >
-              {word}
-            </motion.span>
+      <div className="relative mx-auto w-full max-w-7xl px-6 pb-[130px] pt-[120px] sm:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 26 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: easeOut }}
+          className="mb-[26px] inline-flex items-center gap-[9px] rounded-full border px-4 py-2"
+          style={{
+            background: "rgba(30,107,230,.16)",
+            borderColor: "rgba(30,107,230,.4)",
+          }}
+        >
+          <span
+            className="h-[7px] w-[7px] rounded-full bg-accent"
+            style={{ boxShadow: "0 0 0 4px rgba(30,107,230,.25)" }}
+          />
+          <span className="font-heading text-xs font-semibold uppercase tracking-[0.14em] text-[#cfe0ff]">
+            Engineering · Operations · Maintenance
+          </span>
+        </motion.div>
+
+        <h1
+          className="mb-[26px] font-heading font-extrabold uppercase text-white"
+          style={{
+            fontSize: "clamp(44px, 8.5vw, 104px)",
+            lineHeight: 0.98,
+            letterSpacing: "-0.02em",
+          }}
+        >
+          {line1.map((word, i) => (
+            <span key={word} className="mr-4">
+              <HeroWord word={word} index={i} />
+            </span>
+          ))}
+          <br />
+          {line2.map((word, i) => (
+            <span key={word} className="text-accent">
+              <HeroWord word={word} index={line1.length + i} />
+            </span>
           ))}
         </h1>
+
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 26 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.1, ease: easeOut }}
-          className="mt-6 max-w-xl text-balance text-lg text-white/80 sm:text-xl"
+          transition={{ duration: 0.7, delay: 0.5, ease: easeOut }}
+          className="mb-[38px] max-w-[560px] text-[#dbe6fb]"
+          style={{ fontSize: "clamp(16px, 2.1vw, 21px)", lineHeight: 1.55 }}
         >
-          Engineering, Operations & Maintenance — from concept to running asset.
+          Engineering, operations &amp; maintenance — from concept to running asset.
+          Zimbabwe&rsquo;s EPCM and industrial-supplies partner for corporate and
+          government projects.
         </motion.p>
+
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 26 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 1.3, ease: easeOut }}
-          className="mt-9 flex flex-wrap items-center gap-4"
+          transition={{ duration: 0.7, delay: 0.65, ease: easeOut }}
+          className="flex flex-wrap gap-3.5"
         >
           <Link
             href="/services"
-            className="group inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-accent-light"
+            className="btn-fill inline-flex items-center rounded-full bg-accent px-7 py-4 font-heading text-[15px] font-semibold text-white"
           >
-            Explore our services
-            <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+            <span>
+              Explore our services <span className="btn-arrow">→</span>
+            </span>
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center gap-2 rounded-full border border-white/30 px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-white/10"
+            className="btn-ghost inline-flex items-center rounded-full border-[1.5px] border-white/35 bg-transparent px-7 py-4 font-heading text-[15px] font-semibold text-white"
           >
-            Request a quote
+            <span>Request a quote</span>
           </Link>
         </motion.div>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.6 }}
-          className="mt-10 text-xs font-semibold uppercase tracking-[0.2em] text-white/50"
-        >
-          {siteConfig.positioning}
-        </motion.p>
       </div>
+
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.7, delay: 1, ease: easeOut }}
+        className="absolute bottom-[26px] left-1/2 flex -translate-x-1/2 flex-col items-center gap-2 text-white/60"
+      >
+        <span className="font-heading text-[10.5px] uppercase tracking-[0.22em]">Scroll</span>
+        <span
+          className="h-[34px] w-px"
+          style={{
+            background: "linear-gradient(to bottom, rgba(255,255,255,.7), transparent)",
+          }}
+        />
+      </motion.div>
     </section>
   );
 }

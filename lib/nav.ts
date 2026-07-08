@@ -4,21 +4,27 @@ export type NavLink = {
   description?: string;
 };
 
+export type NavCard = {
+  title: string;
+  description: string;
+  href: string;
+};
+
+export type MegaMenu =
+  | {
+      type: "intro-links";
+      intro: string;
+      columns: NavLink[][];
+    }
+  | {
+      type: "cards";
+      cards: NavCard[];
+    };
+
 export type NavItem = {
   label: string;
   href: string;
-  megaMenu?: {
-    columns: {
-      heading: string;
-      links: NavLink[];
-    }[];
-    featured?: {
-      title: string;
-      description: string;
-      href: string;
-      image: string;
-    };
-  };
+  megaMenu?: MegaMenu;
 };
 
 export const mainNav: NavItem[] = [
@@ -26,71 +32,57 @@ export const mainNav: NavItem[] = [
     label: "Who We Are",
     href: "/who-we-are",
     megaMenu: {
+      type: "intro-links",
+      intro:
+        "A Zimbabwean engineering, O&M and industrial-supplies partner built to deliver — regardless.",
       columns: [
-        {
-          heading: "Company",
-          links: [
-            { label: "Vision & Mission", href: "/who-we-are#vision-mission" },
-            { label: "Core Values", href: "/who-we-are#values" },
-            { label: "Capacity & Competence", href: "/who-we-are#capacity" },
-            { label: "Corporate Governance & Ethics", href: "/who-we-are#governance" },
-            { label: "HSE Policy", href: "/who-we-are#hse" },
-          ],
-        },
-        {
-          heading: "Trust & Compliance",
-          links: [
-            { label: "Management Systems", href: "/compliance#qms" },
-            { label: "HSE Framework", href: "/compliance#hse" },
-            { label: "Regulatory Compliance", href: "/compliance#compliance" },
-          ],
-        },
+        [
+          { label: "Company Overview", href: "/who-we-are" },
+          { label: "Vision & Mission", href: "/who-we-are#vision-mission" },
+          { label: "Core Values", href: "/who-we-are#values" },
+        ],
+        [
+          { label: "Governance & Ethics", href: "/compliance#governance" },
+          { label: "HSE Policy", href: "/compliance#hse" },
+          { label: "Compliance", href: "/compliance" },
+        ],
       ],
-      featured: {
-        title: "Full project lifecycle delivery",
-        description: "From concept to running asset — engineering, operations & maintenance you can rely on.",
-        href: "/who-we-are",
-        image: "/images/control-room-panel.jpg",
-      },
     },
   },
   {
     label: "What We Do",
     href: "/what-we-do",
     megaMenu: {
-      columns: [
+      type: "cards",
+      cards: [
         {
-          heading: "Services",
-          links: [
-            { label: "Architecture & Engineering", href: "/services#architecture-engineering" },
-            { label: "Planning & Front-End", href: "/services#planning-front-end" },
-            { label: "Construction & Field Services", href: "/services#construction-field" },
-            { label: "Operations & Maintenance", href: "/services#operations-maintenance" },
-            { label: "Water Treatment Plant O&M", href: "/services#water-treatment" },
-            { label: "Project Management (EPCM)", href: "/services#project-management" },
-          ],
+          title: "Engineering & O&M",
+          description: "Concept to running asset",
+          href: "/services#operations-maintenance",
         },
         {
-          heading: "Explore",
-          links: [
-            { label: "Sectors We Serve", href: "/sectors" },
-            { label: "Projects", href: "/projects" },
-            { label: "Industrial & Hardware Supplies", href: "/products" },
-          ],
+          title: "Water Treatment O&M",
+          description: "SCADA-monitored potable water",
+          href: "/services#water-treatment",
+        },
+        {
+          title: "Project Management",
+          description: "EPCM delivery model",
+          href: "/services#project-management",
+        },
+        {
+          title: "Industrial Supplies",
+          description: "Roofing, electrical, pumps & more",
+          href: "/products",
         },
       ],
-      featured: {
-        title: "Water Treatment Plant O&M",
-        description: "Filtration, dosing, UV and SCADA-monitored potable water systems — our key differentiator.",
-        href: "/services#water-treatment",
-        image: "/images/water-treatment-skid.jpg",
-      },
     },
   },
+  { label: "Services", href: "/services" },
+  { label: "Products", href: "/products" },
   { label: "Sectors", href: "/sectors" },
   { label: "Projects", href: "/projects" },
-  { label: "Products", href: "/products" },
-  { label: "Compliance", href: "/compliance" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export const bottomNavItems = [
@@ -106,13 +98,13 @@ export const footerLinks = {
     { label: "Who We Are", href: "/who-we-are" },
     { label: "What We Do", href: "/what-we-do" },
     { label: "Compliance", href: "/compliance" },
-    { label: "Contact", href: "/contact" },
+    { label: "Projects", href: "/projects" },
   ],
   services: [
-    { label: "Architecture & Engineering", href: "/services#architecture-engineering" },
-    { label: "Operations & Maintenance", href: "/services#operations-maintenance" },
-    { label: "Water Treatment O&M", href: "/services#water-treatment" },
-    { label: "Project Management (EPCM)", href: "/services#project-management" },
+    { label: "Engineering & O&M", href: "/services#operations-maintenance" },
+    { label: "Water Treatment", href: "/services#water-treatment" },
+    { label: "Project Management", href: "/services#project-management" },
+    { label: "Industrial Supplies", href: "/products" },
   ],
   explore: [
     { label: "Sectors We Serve", href: "/sectors" },

@@ -95,21 +95,16 @@ export const epcmPillars = [
   {
     letter: "E",
     title: "Engineering",
-    description: "Design and technical engineering across civil, structural, electrical and mechanical disciplines.",
+    description: "Architectural, civil, structural, electrical & mechanical design.",
   },
   {
     letter: "P",
     title: "Procurement",
-    description: "Sourcing and supply chain management for materials, equipment and industrial hardware.",
+    description: "Sourcing through our own industrial & hardware supply lines.",
   },
   {
-    letter: "C",
+    letter: "CM",
     title: "Construction Management",
-    description: "On-site coordination of contractors, schedules and quality across every work package.",
-  },
-  {
-    letter: "M",
-    title: "Ownership & Risk",
-    description: "AMI carries delivery risk and accountability from concept through to a running, handed-over asset.",
+    description: "Field execution, commissioning, ownership & risk carried by us.",
   },
 ];

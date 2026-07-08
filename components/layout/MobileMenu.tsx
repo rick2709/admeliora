@@ -1,16 +1,25 @@
 "use client";
 
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Phone, Mail } from "lucide-react";
+import { Logo } from "@/components/ui/Logo";
 import { mainNav } from "@/lib/nav";
 import { siteConfig } from "@/lib/site";
-import { staggerContainer, fadeUp } from "@/lib/motion";
-import { useEffect } from "react";
+import { easeOut } from "@/lib/motion";
 
 type MobileMenuProps = {
   open: boolean;
   onClose: () => void;
+};
+
+const slideIn = {
+  hidden: { opacity: 0, x: -24 },
+  show: (i: number) => ({
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.5, delay: 0.12 + i * 0.06, ease: easeOut },
+  }),
 };
 
 export function MobileMenu({ open, onClose }: MobileMenuProps) {
@@ -31,58 +40,58 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.25 }}
-          className="fixed inset-0 z-50 flex flex-col bg-navy lg:hidden"
+          transition={{ duration: 0.4 }}
+          className="fixed inset-0 z-[1100] flex flex-col bg-navy md:hidden"
         >
-          <motion.nav
-            variants={staggerContainer(0.06, 0.15)}
-            initial="hidden"
-            animate="show"
-            className="flex flex-1 flex-col justify-center gap-1 px-8 pt-20 pb-8"
-            aria-label="Mobile primary"
-          >
-            {mainNav.map((item) => (
-              <motion.div key={item.label} variants={fadeUp}>
+          <div className="flex h-[60px] items-center justify-between px-[22px]">
+            <Logo variant="light" showWordmark={false} />
+            <button
+              type="button"
+              aria-label="Close menu"
+              onClick={onClose}
+              className="flex h-11 w-11 items-center justify-center text-[30px] leading-none text-white"
+            >
+              ×
+            </button>
+          </div>
+
+          <nav aria-label="Mobile primary" className="flex flex-col gap-1 px-[22px] py-6">
+            {mainNav.map((item, i) => (
+              <motion.div
+                key={item.label}
+                custom={i}
+                variants={slideIn}
+                initial="hidden"
+                animate="show"
+              >
                 <Link
                   href={item.href}
                   onClick={onClose}
-                  className="block border-b border-white/10 py-4 font-heading text-3xl font-bold text-white transition-colors hover:text-accent-light"
+                  className="block py-2 font-heading text-[30px] font-bold text-white transition-colors hover:text-accent-light"
                 >
                   {item.label}
                 </Link>
               </motion.div>
             ))}
-            <motion.div variants={fadeUp} className="pt-6">
-              <Link
-                href="/contact"
-                onClick={onClose}
-                className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-white"
-              >
-                Request a Quote
-                <ArrowRight size={16} />
-              </Link>
-            </motion.div>
-          </motion.nav>
+          </nav>
 
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="show"
-            className="border-t border-white/10 px-8 py-6 flex flex-col gap-3"
+          <div
+            className="mt-auto px-[22px] pt-[22px]"
+            style={{ paddingBottom: "calc(30px + env(safe-area-inset-bottom))" }}
           >
-            <a
-              href={siteConfig.phones[0].href}
-              className="flex items-center gap-2 text-sm text-white/70 hover:text-white"
+            <Link
+              href="/contact"
+              onClick={onClose}
+              className="btn-fill flex items-center justify-center rounded-full bg-accent py-4 font-heading text-[15px] font-semibold text-white"
             >
-              <Phone size={15} /> {siteConfig.phones[0].number}
-            </a>
-            <a
-              href={`mailto:${siteConfig.emails[0].address}`}
-              className="flex items-center gap-2 text-sm text-white/70 hover:text-white"
-            >
-              <Mail size={15} /> {siteConfig.emails[0].address}
-            </a>
-          </motion.div>
+              <span>
+                Request a Quote <span className="btn-arrow">→</span>
+              </span>
+            </Link>
+            <p className="mt-5 text-center text-[13px] tracking-wide text-[#9fb4d8]">
+              {siteConfig.tagline}
+            </p>
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

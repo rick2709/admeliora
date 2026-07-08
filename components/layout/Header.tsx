@@ -3,8 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ChevronDown, ArrowRight } from "lucide-react";
-import Image from "next/image";
+import { ChevronDown } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { mainNav } from "@/lib/nav";
 import { cn } from "@/lib/utils";
@@ -13,6 +12,7 @@ import { MobileMenuButton } from "@/components/layout/MobileMenuButton";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const [lastPathname, setLastPathname] = useState(pathname);
@@ -24,44 +24,51 @@ export default function Header() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+
+    const mq = window.matchMedia("(max-width: 767px)");
+    const onMq = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mq.addEventListener("change", onMq);
+
+    // Sync initial state from the browser APIs once mounted — no SSR equivalent exists
+    // for scroll position or matchMedia, so this one-time post-mount sync is intentional.
+    onScroll();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setIsMobile(mq.matches);
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      mq.removeEventListener("change", onMq);
+    };
   }, []);
 
-  const isSolid = scrolled || mobileOpen;
+  const isSolid = scrolled || isMobile;
 
   return (
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+          "fixed inset-x-0 top-0 z-50 flex items-center transition-[height,background-color,box-shadow,border-color] duration-[350ms] ease-out",
+          scrolled ? "h-[62px]" : "h-[78px]",
           isSolid
-            ? "bg-white/95 backdrop-blur-md shadow-sm py-2.5"
-            : "bg-gradient-to-b from-navy-dark/70 to-transparent py-4"
+            ? "border-b border-navy/10 bg-white/92 shadow-[0_6px_24px_-12px_rgba(11,33,73,0.35)] backdrop-blur-lg backdrop-saturate-150"
+            : "border-b border-transparent bg-transparent"
         )}
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-5 sm:px-8">
-          <Link href="/" aria-label="AD Meliora home" className="relative z-10">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 sm:px-8">
+          <Link href="/" aria-label="AD Meliora home" className="shrink-0">
             <Logo variant={isSolid ? "dark" : "light"} />
           </Link>
 
-          <nav
-            aria-label="Primary"
-            className="hidden lg:flex items-center gap-1"
-          >
+          <nav aria-label="Primary" className="hidden md:flex items-center gap-7 h-full">
             {mainNav.map((item) =>
               item.megaMenu ? (
-                // `static` (not `relative`) is the trick: it takes this item out of the
-                // positioning context so the panel below anchors to the fixed <header>
-                // instead of this individual item — every panel gets the same width and
-                // alignment no matter which nav item triggered it.
-                <div key={item.label} className="group static">
-                  <Link
-                    href={item.href}
+                <div key={item.label} className="group static flex h-full items-center">
+                  <button
+                    type="button"
                     className={cn(
-                      "flex items-center gap-1 rounded-full px-4 py-2 text-sm font-semibold transition-colors",
-                      isSolid ? "text-navy hover:text-accent" : "text-white hover:text-accent-light"
+                      "nav-underline flex items-center gap-1 font-heading text-sm font-semibold tracking-wide",
+                      isSolid ? "text-navy" : "text-white"
                     )}
                     aria-haspopup="true"
                   >
@@ -70,65 +77,54 @@ export default function Header() {
                       size={14}
                       className="transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
                     />
-                  </Link>
+                  </button>
 
-                  {/* Invisible bridge over the visual gap between the trigger and the
-                      panel, so the pointer never leaves a hoverable descendant of
-                      `.group` while moving down into the panel — prevents flicker. */}
+                  {/* Invisible bridge over the gap between trigger and panel */}
                   <div className="absolute inset-x-0 top-full hidden h-4 group-hover:block group-focus-within:block" />
 
-                  <div className="absolute inset-x-0 top-full z-40 mx-auto hidden max-w-7xl px-5 group-hover:flex group-focus-within:flex sm:px-8">
-                    <div className="mt-4 h-[26rem] w-full overflow-y-auto rounded-xl bg-white shadow-[0_10px_15px_-3px_rgba(11,33,73,0.1),0_20px_40px_-12px_rgba(11,33,73,0.2)] ring-1 ring-black/5 group-hover:animate-mega-panel group-focus-within:animate-mega-panel">
-                      <div className="grid h-full grid-cols-[1.6fr_1fr] gap-0">
-                        <div className="grid grid-cols-2 gap-6 p-7">
-                          {item.megaMenu.columns.map((col) => (
-                            <div key={col.heading}>
-                              <p className="text-xs font-semibold uppercase tracking-wide text-steel/70">
-                                {col.heading}
-                              </p>
-                              <ul className="mt-3 space-y-2.5">
-                                {col.links.map((link) => (
-                                  <li key={link.label}>
-                                    <Link
-                                      href={link.href}
-                                      className="text-sm font-medium text-navy hover:text-accent transition-colors"
-                                    >
-                                      {link.label}
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </div>
-                          ))}
+                  <div className="pointer-events-none absolute inset-x-0 top-full z-40 flex -translate-y-2.5 border-t border-navy/[0.06] bg-white opacity-0 shadow-[0_24px_40px_-20px_rgba(11,33,73,0.35)] transition-[opacity,transform] duration-[280ms] group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                    {item.megaMenu.type === "intro-links" ? (
+                      <div className="mx-auto grid w-full max-w-7xl grid-cols-[1.1fr_1fr_1fr] gap-9 px-6 py-7 sm:px-8">
+                        <div>
+                          <p className="mb-2 font-heading text-xl font-bold text-navy">
+                            {item.label}
+                          </p>
+                          <p className="max-w-[280px] text-[13.5px] leading-relaxed text-steel">
+                            {item.megaMenu.intro}
+                          </p>
                         </div>
-                        {item.megaMenu.featured && (
-                          <Link
-                            href={item.megaMenu.featured.href}
-                            className="group/featured relative flex h-full flex-col justify-end overflow-hidden bg-navy p-5"
-                          >
-                            <Image
-                              src={item.megaMenu.featured.image}
-                              alt=""
-                              fill
-                              sizes="480px"
-                              className="object-cover opacity-60 transition-transform duration-500 group-hover/featured:scale-110"
-                            />
-                            <div className="absolute inset-0 bg-gradient-to-t from-navy-dark via-navy/50 to-transparent" />
-                            <div className="relative">
-                              <p className="font-heading text-base font-bold text-white text-balance">
-                                {item.megaMenu.featured.title}
-                              </p>
-                              <p className="mt-1 text-xs text-white/70 line-clamp-2">
-                                {item.megaMenu.featured.description}
-                              </p>
-                              <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-accent-light">
-                                Learn more <ArrowRight size={12} />
-                              </span>
-                            </div>
-                          </Link>
-                        )}
+                        {item.megaMenu.columns.map((col, i) => (
+                          <div key={i} className="flex flex-col gap-0.5">
+                            {col.map((link) => (
+                              <Link
+                                key={link.label}
+                                href={link.href}
+                                className="py-2 text-sm font-semibold text-navy hover:text-accent transition-colors"
+                              >
+                                {link.label}
+                              </Link>
+                            ))}
+                          </div>
+                        ))}
                       </div>
-                    </div>
+                    ) : (
+                      <div className="mx-auto grid w-full max-w-7xl grid-cols-4 gap-5 px-6 py-7 sm:px-8">
+                        {item.megaMenu.cards.map((card) => (
+                          <Link
+                            key={card.title}
+                            href={card.href}
+                            className="block rounded-2xl border border-navy/[0.06] bg-offwhite p-[18px] transition-colors hover:border-accent/30"
+                          >
+                            <span className="mb-1.5 block font-heading text-[15px] font-bold text-navy">
+                              {card.title}
+                            </span>
+                            <span className="text-[12.5px] leading-relaxed text-steel">
+                              {card.description}
+                            </span>
+                          </Link>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </div>
               ) : (
@@ -136,8 +132,8 @@ export default function Header() {
                   key={item.label}
                   href={item.href}
                   className={cn(
-                    "rounded-full px-4 py-2 text-sm font-semibold transition-colors",
-                    isSolid ? "text-navy hover:text-accent" : "text-white hover:text-accent-light"
+                    "nav-underline font-heading text-sm font-semibold tracking-wide whitespace-nowrap",
+                    isSolid ? "text-navy" : "text-white"
                   )}
                 >
                   {item.label}
@@ -146,15 +142,14 @@ export default function Header() {
             )}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-3">
-            <Link
-              href="/contact"
-              className="group inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-accent-light"
-            >
-              Request a Quote
-              <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
-            </Link>
-          </div>
+          <Link
+            href="/contact"
+            className="btn-fill hidden shrink-0 items-center rounded-full bg-accent px-[22px] py-3 font-heading text-[13.5px] font-semibold tracking-wide text-white md:inline-flex"
+          >
+            <span>
+              Request a Quote <span className="btn-arrow">→</span>
+            </span>
+          </Link>
 
           <MobileMenuButton
             open={mobileOpen}
