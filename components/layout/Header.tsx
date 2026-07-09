@@ -14,6 +14,7 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [suppressHover, setSuppressHover] = useState(false);
   const pathname = usePathname();
   const [lastPathname, setLastPathname] = useState(pathname);
 
@@ -21,6 +22,21 @@ export default function Header() {
     setLastPathname(pathname);
     setMobileOpen(false);
   }
+
+  useEffect(() => {
+    if (!suppressHover) return;
+    // Toggling pointer-events off then on (across two paints) breaks the browser's
+    // stale :hover match on the just-clicked link, so the mega-menu doesn't stay
+    // open after navigation just because the cursor hasn't physically moved.
+    let raf2 = 0;
+    const raf1 = window.requestAnimationFrame(() => {
+      raf2 = window.requestAnimationFrame(() => setSuppressHover(false));
+    });
+    return () => {
+      window.cancelAnimationFrame(raf1);
+      window.cancelAnimationFrame(raf2);
+    };
+  }, [suppressHover]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -60,7 +76,14 @@ export default function Header() {
             <Logo variant={isSolid ? "dark" : "light"} />
           </Link>
 
-          <nav aria-label="Primary" className="hidden md:flex items-center gap-7 h-full">
+          <nav
+            aria-label="Primary"
+            onClick={() => setSuppressHover(true)}
+            className={cn(
+              "hidden md:flex items-center gap-7 h-full",
+              suppressHover && "pointer-events-none"
+            )}
+          >
             {mainNav.map((item) =>
               item.megaMenu ? (
                 <div key={item.label} className="group static flex h-full items-center">
