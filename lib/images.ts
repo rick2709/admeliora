@@ -38,32 +38,32 @@ const photo = {
 export const images = {
   hero: {
     home: {
-      src: photo.conveyorSilo,
-      alt: "AD Meliora mineral-processing plant with conveyor bridges and silo",
+      src: photo.steelStructure,
+      alt: "Multi-level industrial steel structure with pipe racks and walkways",
     } satisfies SiteImage,
     whoWeAre: {
       src: photo.staffBanner,
       alt: "AD Meliora technicians in PPE beside the company vision and values banner",
     } satisfies SiteImage,
     whatWeDo: {
-      src: photo.steelStructure,
-      alt: "Multi-level industrial steel structure with pipe racks and walkways",
+      src: photo.rollForming,
+      alt: "AD Meliora technicians operating the in-house roll-forming production line",
     } satisfies SiteImage,
     services: {
-      src: photo.waterScada,
-      alt: "SCADA control screen monitoring a potable water treatment system",
+      src: photo.pickup,
+      alt: "AD Meliora branded pickup on site, ready to deliver engineering services",
     } satisfies SiteImage,
     products: {
-      src: photo.roofingSheets,
-      alt: "AD Meliora technicians producing roofing sheets on the roll-forming line",
+      src: photo.truck,
+      alt: "AD Meliora branded flatbed truck ready to deliver industrial supplies",
     } satisfies SiteImage,
     sectors: {
       src: photo.truck,
       alt: "AD Meliora flatbed truck branded Engineering, Operations & Maintenance",
     } satisfies SiteImage,
     projects: {
-      src: photo.rollForming,
-      alt: "AD Meliora staff beside the company banner and roll-forming machine",
+      src: unsplash("photo-1590959651373-a3db0f38c961", 1600),
+      alt: "Construction crane on an active AD Meliora project site",
     } satisfies SiteImage,
     compliance: {
       src: photo.staffBanner,
@@ -85,8 +85,8 @@ export const images = {
       alt: "Conveyor bridges and silo at a mineral-processing plant",
     } satisfies SiteImage,
     refinery: {
-      src: photo.steelStructure,
-      alt: "Tall industrial steel structure with pipework and walkways",
+      src: photo.staffBanner,
+      alt: "AD Meliora project team beside the company vision and values banner",
     } satisfies SiteImage,
     steelworks: {
       src: photo.steelStructure,
@@ -175,8 +175,8 @@ export const images = {
 
   mechanical: {
     bearings: {
-      src: unsplash("photo-1517524008697-84bbe3c3fd98", 1600),
-      alt: "Industrial bearings and drive components",
+      src: local("mechanical-gears-closeup.jpg"),
+      alt: "Close-up of precision metal gears and drive components",
     } satisfies SiteImage,
     machining: {
       src: unsplash("photo-1565043589221-1a6fd9ae45c7", 1600),
@@ -186,8 +186,8 @@ export const images = {
 
   hardware: {
     buildingMaterials: {
-      src: photo.roofingSheets,
-      alt: "Roofing sheets and building materials produced in-house by AD Meliora",
+      src: photo.pickup,
+      alt: "AD Meliora branded pickup outside the premises, stocked for building-materials delivery",
     } satisfies SiteImage,
     paint: {
       src: unsplash("photo-1562259949-e8e7689d7828", 1600),
@@ -234,8 +234,8 @@ export const images = {
       alt: "Municipal infrastructure and local authority services",
     } satisfies SiteImage,
     energyPower: {
-      src: photo.steelStructure,
-      alt: "Heavy industrial structure supporting power infrastructure",
+      src: photo.waterScada,
+      alt: "SCADA control screen monitoring plant and power infrastructure systems",
     } satisfies SiteImage,
     waterSanitation: {
       src: photo.waterSkid,

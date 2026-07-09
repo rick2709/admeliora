@@ -54,6 +54,15 @@
   }
 }
 
+/* Chevron rotation on mega-menu trigger hover, pure CSS via the .group parent */
+.mega-chevron {
+  transition: transform 0.2s ease;
+}
+.group:hover .mega-chevron,
+.group:focus-within .mega-chevron {
+  transform: rotate(180deg);
+}
+
 @keyframes ami-kenburns {
   0% {
     transform: scale(1) translate(0, 0);

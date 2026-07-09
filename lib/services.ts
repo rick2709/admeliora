@@ -34,7 +34,7 @@ export const services: Service[] = [
       "Cost estimation",
       "Risk assessment",
     ],
-    image: images.hero.whatWeDo,
+    image: images.hero.whoWeAre,
   },
   {
     id: "construction-field",
@@ -47,7 +47,7 @@ export const services: Service[] = [
       "Electrical installation",
       "Mechanical installation",
     ],
-    image: images.construction.civilWorks,
+    image: images.roofing.metalSheets,
   },
   {
     id: "operations-maintenance",
@@ -87,7 +87,7 @@ export const services: Service[] = [
       "Progress reporting",
       "Cost control",
     ],
-    image: images.plant.controlRoom,
+    image: images.roofing.rollForming,
   },
 ];
 

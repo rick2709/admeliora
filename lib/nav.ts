@@ -51,7 +51,7 @@ export const mainNav: NavItem[] = [
   },
   {
     label: "What We Do",
-    href: "/what-we-do",
+    href: "/services",
     megaMenu: {
       type: "cards",
       cards: [
@@ -78,7 +78,6 @@ export const mainNav: NavItem[] = [
       ],
     },
   },
-  { label: "Services", href: "/services" },
   { label: "Products", href: "/products" },
   { label: "Sectors", href: "/sectors" },
   { label: "Projects", href: "/projects" },
@@ -96,7 +95,7 @@ export const bottomNavItems = [
 export const footerLinks = {
   company: [
     { label: "Who We Are", href: "/who-we-are" },
-    { label: "What We Do", href: "/what-we-do" },
+    { label: "What We Do", href: "/services" },
     { label: "Compliance", href: "/compliance" },
     { label: "Projects", href: "/projects" },
   ],

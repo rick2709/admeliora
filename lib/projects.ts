@@ -17,6 +17,16 @@ export const projectCategories: ProjectCategory[] = [
 
 export const projectGallery: ProjectImage[] = images.projectsGallery as ProjectImage[];
 
+export const projectExpertise = [
+  "Thermal Power Plants",
+  "Mining Infrastructure",
+  "Oil and Gas Facilities",
+  "Water and Wastewater Treatment Plants",
+  "High Voltage Substations",
+  "Industrial Facilities",
+  "Civil and Building Construction",
+];
+
 export type HomeShowcaseItem = {
   title: string;
   category: string;
@@ -43,21 +53,21 @@ export const homeProjectShowcase: HomeShowcaseItem[] = [
   {
     title: "Treatment skid & dosing",
     category: "Water",
-    image: images.water.dosingSkid,
+    image: images.water.reservoir,
     colSpan: 2,
     rowSpan: 1,
   },
   {
     title: "Roll-forming production",
     category: "Roofing",
-    image: images.roofing.rollForming,
+    image: images.roofing.metalSheets,
     colSpan: 2,
     rowSpan: 1,
   },
   {
     title: "Conveyors & bulk handling",
     category: "Mining",
-    image: images.construction.civilWorks,
+    image: images.fleet.delivery,
     colSpan: 4,
     rowSpan: 1,
   },

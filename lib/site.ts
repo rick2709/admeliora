@@ -16,10 +16,7 @@ export const siteConfig = {
     number: "263779414157",
     href: "https://wa.me/263779414157",
   },
-  emails: [
-    { label: "General", address: "admeliora@admeliorazw.com" },
-    { label: "Misheck Sadzauchi", address: "Misheck.Sadzauchi@admeliorazw.com" },
-  ],
+  emails: [{ label: "General", address: "admeliora@admeliorazw.com" }],
   address: {
     line1: "1070 Tynwald South Industry",
     city: "Harare",

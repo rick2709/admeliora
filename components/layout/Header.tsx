@@ -73,18 +73,16 @@ export default function Header() {
                     aria-haspopup="true"
                   >
                     {item.label}
-                    <ChevronDown
-                      size={14}
-                      className="transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
-                    />
+                    <ChevronDown size={14} className="mega-chevron" />
                   </button>
 
-                  {/* Invisible bridge over the gap between trigger and panel */}
+                  {/* Invisible bridge over the gap between trigger and panel — keeps :hover alive while the cursor travels down */}
                   <div className="absolute inset-x-0 top-full hidden h-4 group-hover:block group-focus-within:block" />
 
-                  <div className="pointer-events-none absolute inset-x-0 top-full z-40 flex -translate-y-2.5 border-t border-navy/[0.06] bg-white opacity-0 shadow-[0_24px_40px_-20px_rgba(11,33,73,0.35)] transition-[opacity,transform] duration-[280ms] group-hover:pointer-events-auto group-hover:translate-y-0 group-hover:opacity-100 group-focus-within:pointer-events-auto group-focus-within:translate-y-0 group-focus-within:opacity-100">
+                  {/* Panel: centers itself within the header via inset-x-0 + mx-auto + max-w, so every menu lines up with the page container regardless of trigger position */}
+                  <div className="absolute inset-x-0 top-full z-40 mx-auto hidden max-h-[75vh] w-full max-w-7xl overflow-y-auto rounded-xl border border-navy/[0.06] bg-white shadow-[0_8px_16px_-6px_rgba(11,33,73,0.16),0_28px_48px_-20px_rgba(11,33,73,0.35)] group-hover:flex group-hover:animate-mega-panel group-focus-within:flex group-focus-within:animate-mega-panel">
                     {item.megaMenu.type === "intro-links" ? (
-                      <div className="mx-auto grid w-full max-w-7xl grid-cols-[1.1fr_1fr_1fr] gap-9 px-6 py-7 sm:px-8">
+                      <div className="grid w-full grid-cols-[1.1fr_1fr_1fr] gap-9 px-6 py-7 sm:px-8">
                         <div>
                           <p className="mb-2 font-heading text-xl font-bold text-navy">
                             {item.label}
@@ -108,7 +106,7 @@ export default function Header() {
                         ))}
                       </div>
                     ) : (
-                      <div className="mx-auto grid w-full max-w-7xl grid-cols-4 gap-5 px-6 py-7 sm:px-8">
+                      <div className="grid w-full grid-cols-4 gap-5 px-6 py-7 sm:px-8">
                         {item.megaMenu.cards.map((card) => (
                           <Link
                             key={card.title}
