@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown } from "lucide-react";
@@ -78,7 +79,15 @@ export default function Header() {
 
           <nav
             aria-label="Primary"
-            onClick={() => setSuppressHover(true)}
+            onClick={() => {
+              // A clicked link keeps keyboard focus, and the panel reveal is also
+              // driven by group-focus-within — without blurring, the panel stays
+              // open via focus alone even after the mouse hovers away.
+              if (document.activeElement instanceof HTMLElement) {
+                document.activeElement.blur();
+              }
+              setSuppressHover(true);
+            }}
             className={cn(
               "hidden md:flex items-center gap-7 h-full",
               suppressHover && "pointer-events-none"
@@ -103,49 +112,61 @@ export default function Header() {
                   <div className="absolute inset-x-0 top-full hidden h-4 group-hover:block group-focus-within:block" />
 
                   {/* Panel: centers itself within the header via inset-x-0 + mx-auto + max-w, so every menu lines up with the page container regardless of trigger position */}
-                  <div className="absolute inset-x-0 top-full z-40 mx-auto hidden max-h-[75vh] w-full max-w-7xl overflow-y-auto rounded-xl border border-navy/[0.06] bg-white shadow-[0_8px_16px_-6px_rgba(11,33,73,0.16),0_28px_48px_-20px_rgba(11,33,73,0.35)] group-hover:flex group-hover:animate-mega-panel group-focus-within:flex group-focus-within:animate-mega-panel">
-                    {item.megaMenu.type === "intro-links" ? (
-                      <div className="grid w-full grid-cols-[1.1fr_1fr_1fr] gap-9 px-6 py-7 sm:px-8">
-                        <div>
-                          <p className="mb-2 font-heading text-xl font-bold text-navy">
-                            {item.label}
-                          </p>
-                          <p className="max-w-[280px] text-[13.5px] leading-relaxed text-steel">
-                            {item.megaMenu.intro}
-                          </p>
-                        </div>
-                        {item.megaMenu.columns.map((col, i) => (
-                          <div key={i} className="flex flex-col gap-0.5">
-                            {col.map((link) => (
-                              <Link
-                                key={link.label}
-                                href={link.href}
-                                className="py-2 text-sm font-semibold text-navy hover:text-accent transition-colors"
-                              >
-                                {link.label}
-                              </Link>
-                            ))}
+                  <div className="absolute inset-x-0 top-full z-40 mx-auto hidden max-h-[75vh] w-full max-w-7xl overflow-y-auto overflow-x-hidden rounded-xl border border-navy/[0.06] bg-white shadow-[0_8px_16px_-6px_rgba(11,33,73,0.16),0_28px_48px_-20px_rgba(11,33,73,0.35)] group-hover:flex group-hover:animate-mega-panel group-focus-within:flex group-focus-within:animate-mega-panel">
+                    <div className="grid w-full grid-cols-[1.5fr_1fr]">
+                      {item.megaMenu.type === "intro-links" ? (
+                        <div className="grid grid-cols-[1.1fr_1fr_1fr] gap-9 px-6 py-7 sm:px-8">
+                          <div>
+                            <p className="mb-2 font-heading text-xl font-bold text-navy">
+                              {item.label}
+                            </p>
+                            <p className="max-w-[280px] text-[13.5px] leading-relaxed text-steel">
+                              {item.megaMenu.intro}
+                            </p>
                           </div>
-                        ))}
+                          {item.megaMenu.columns.map((col, i) => (
+                            <div key={i} className="flex flex-col gap-0.5">
+                              {col.map((link) => (
+                                <Link
+                                  key={link.label}
+                                  href={link.href}
+                                  className="py-2 text-sm font-semibold text-navy hover:text-accent transition-colors"
+                                >
+                                  {link.label}
+                                </Link>
+                              ))}
+                            </div>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="grid grid-cols-2 gap-5 px-6 py-7 sm:px-8">
+                          {item.megaMenu.cards.map((card) => (
+                            <Link
+                              key={card.title}
+                              href={card.href}
+                              className="block rounded-2xl border border-navy/[0.06] bg-offwhite p-[18px] transition-colors hover:border-accent/30"
+                            >
+                              <span className="mb-1.5 block font-heading text-[15px] font-bold text-navy">
+                                {card.title}
+                              </span>
+                              <span className="text-[12.5px] leading-relaxed text-steel">
+                                {card.description}
+                              </span>
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+
+                      <div className="relative hidden min-h-[380px] bg-offwhite sm:block">
+                        <Image
+                          src={item.megaMenu.image.src}
+                          alt={item.megaMenu.image.alt}
+                          fill
+                          sizes="(max-width: 1200px) 30vw, 20vw"
+                          className="object-contain p-4"
+                        />
                       </div>
-                    ) : (
-                      <div className="grid w-full grid-cols-4 gap-5 px-6 py-7 sm:px-8">
-                        {item.megaMenu.cards.map((card) => (
-                          <Link
-                            key={card.title}
-                            href={card.href}
-                            className="block rounded-2xl border border-navy/[0.06] bg-offwhite p-[18px] transition-colors hover:border-accent/30"
-                          >
-                            <span className="mb-1.5 block font-heading text-[15px] font-bold text-navy">
-                              {card.title}
-                            </span>
-                            <span className="text-[12.5px] leading-relaxed text-steel">
-                              {card.description}
-                            </span>
-                          </Link>
-                        ))}
-                      </div>
-                    )}
+                    </div>
                   </div>
                 </div>
               ) : (

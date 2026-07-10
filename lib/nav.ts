@@ -1,3 +1,5 @@
+import { images } from "./images";
+
 export type NavLink = {
   label: string;
   href: string;
@@ -10,15 +12,19 @@ export type NavCard = {
   href: string;
 };
 
+export type MegaMenuImage = { src: string; alt: string };
+
 export type MegaMenu =
   | {
       type: "intro-links";
       intro: string;
       columns: NavLink[][];
+      image: MegaMenuImage;
     }
   | {
       type: "cards";
       cards: NavCard[];
+      image: MegaMenuImage;
     };
 
 export type NavItem = {
@@ -47,6 +53,10 @@ export const mainNav: NavItem[] = [
           { label: "Compliance", href: "/compliance" },
         ],
       ],
+      image: {
+        src: images.hero.home.src,
+        alt: "Elevated conveyor bridges at an AD Meliora mineral-processing site",
+      },
     },
   },
   {
@@ -54,6 +64,7 @@ export const mainNav: NavItem[] = [
     href: "/services",
     megaMenu: {
       type: "cards",
+      image: images.plant.switchgear,
       cards: [
         {
           title: "Engineering & O&M",

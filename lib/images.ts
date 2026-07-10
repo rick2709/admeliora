@@ -33,13 +33,18 @@ const photo = {
   steelStructure: local("control-room-panel.jpg"),
   waterSkid: local("water-treatment-skid.jpg"),
   waterScada: local("water-treatment-scada.jpg"),
+  conveyorBridges: local("plant-conveyor-bridges.jpg"),
+  roSkid: local("water-treatment-ro-skid-containerised.jpg"),
+  roPlant: local("water-treatment-ro-plant.jpg"),
+  pumpStation: local("pump-station-grundfos.jpg"),
+  pumphouseMetering: local("water-pumphouse-metering.jpg"),
 };
 
 export const images = {
   hero: {
     home: {
-      src: photo.steelStructure,
-      alt: "Multi-level industrial steel structure with pipe racks and walkways",
+      src: photo.conveyorBridges,
+      alt: "Elevated conveyor bridges at an AD Meliora mineral-processing site",
     } satisfies SiteImage,
     whoWeAre: {
       src: photo.staffBanner,
@@ -58,8 +63,8 @@ export const images = {
       alt: "AD Meliora branded flatbed truck ready to deliver industrial supplies",
     } satisfies SiteImage,
     sectors: {
-      src: photo.truck,
-      alt: "AD Meliora flatbed truck branded Engineering, Operations & Maintenance",
+      src: photo.steelStructure,
+      alt: "Multi-level industrial steel structure with pipe racks and walkways",
     } satisfies SiteImage,
     projects: {
       src: unsplash("photo-1590959651373-a3db0f38c961", 1600),
@@ -85,8 +90,8 @@ export const images = {
       alt: "Conveyor bridges and silo at a mineral-processing plant",
     } satisfies SiteImage,
     refinery: {
-      src: photo.staffBanner,
-      alt: "AD Meliora project team beside the company vision and values banner",
+      src: photo.pumphouseMetering,
+      alt: "Pumphouse structure with electrical control and metering installation",
     } satisfies SiteImage,
     steelworks: {
       src: photo.steelStructure,
@@ -100,8 +105,8 @@ export const images = {
 
   water: {
     treatmentPlant: {
-      src: photo.waterSkid,
-      alt: "Containerised water treatment skid with filtration and dosing tanks",
+      src: photo.roSkid,
+      alt: "AD Meliora technicians beside a containerised RO water treatment skid",
     } satisfies SiteImage,
     dosingSkid: {
       src: photo.waterSkid,
@@ -112,8 +117,8 @@ export const images = {
       alt: "Industrial pipework and steel structure",
     } satisfies SiteImage,
     reservoir: {
-      src: unsplash("photo-1500375592092-40eb2168fd21", 1600),
-      alt: "Municipal water reservoir infrastructure",
+      src: photo.roPlant,
+      alt: "RO water treatment plant with chemical dosing tanks and pipework",
     } satisfies SiteImage,
   },
 
@@ -164,8 +169,8 @@ export const images = {
 
   pumps: {
     slurry: {
-      src: photo.steelStructure,
-      alt: "Industrial pump and pipework installation",
+      src: photo.pumpStation,
+      alt: "Grundfos pump station with industrial pumps and pipework",
     } satisfies SiteImage,
     submersible: {
       src: unsplash("photo-1581091226825-a6a2a5aee158", 1600),
@@ -246,8 +251,8 @@ export const images = {
       alt: "Mineral-processing plant conveyors and silo",
     } satisfies SiteImage,
     oilGas: {
-      src: photo.steelStructure,
-      alt: "Industrial pipework and process structure",
+      src: photo.pumphouseMetering,
+      alt: "Industrial pipework and metering installation",
     } satisfies SiteImage,
     industrialManufacturing: {
       src: photo.rollForming,
