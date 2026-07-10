@@ -25,8 +25,8 @@ export const siteConfig = {
   },
   socials: [
     { label: "LinkedIn", href: "#" },
-    { label: "Facebook", href: "#" },
-    { label: "Twitter", href: "#" },
+    { label: "Facebook", href: "https://www.facebook.com/share/19CigrWAbD/?mibextid=wwXIfr" },
+    { label: "Twitter", href: "https://x.com/AdMelioraZW" },
   ],
   founded: 2016,
   copyrightYear: 2026,

@@ -38,14 +38,39 @@ const photo = {
   roPlant: local("water-treatment-ro-plant.jpg"),
   pumpStation: local("pump-station-grundfos.jpg"),
   pumphouseMetering: local("water-pumphouse-metering.jpg"),
+  gearsCloseup: local("mechanical-gears-closeup.jpg"),
 };
 
 export const images = {
   hero: {
-    home: {
-      src: photo.conveyorBridges,
-      alt: "Elevated conveyor bridges at an AD Meliora mineral-processing site",
-    } satisfies SiteImage,
+    // Homepage hero carousel — deliberately drawn from photos not used
+    // anywhere else on the homepage, so nothing repeats on the same page.
+    homeCarousel: [
+      {
+        src: photo.conveyorBridges,
+        alt: "Elevated conveyor bridges at an AD Meliora mineral-processing site",
+      },
+      {
+        src: photo.pumpStation,
+        alt: "Grundfos pump station with industrial pumps and pipework",
+      },
+      {
+        src: photo.steelStructure,
+        alt: "Multi-level industrial steel structure with pipe racks and walkways",
+      },
+      {
+        src: photo.waterSkid,
+        alt: "Containerised water treatment skid with filtration and dosing tanks",
+      },
+      {
+        src: photo.staffBanner,
+        alt: "AD Meliora technicians in PPE beside the company vision and values banner",
+      },
+      {
+        src: photo.gearsCloseup,
+        alt: "Close-up of precision metal gears and drive components",
+      },
+    ] satisfies SiteImage[],
     whoWeAre: {
       src: photo.staffBanner,
       alt: "AD Meliora technicians in PPE beside the company vision and values banner",

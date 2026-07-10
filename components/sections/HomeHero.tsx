@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -8,6 +9,8 @@ import { easeOut } from "@/lib/motion";
 
 const line1 = ["We", "Deliver"];
 const line2 = ["Regardless."];
+
+const SLIDE_INTERVAL_MS = 6500;
 
 function HeroWord({ word, index }: { word: string; index: number }) {
   return (
@@ -23,18 +26,37 @@ function HeroWord({ word, index }: { word: string; index: number }) {
 }
 
 export function HomeHero() {
+  const slides = images.hero.homeCarousel;
+  const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setActive((i) => (i + 1) % slides.length);
+    }, SLIDE_INTERVAL_MS);
+    return () => window.clearInterval(id);
+  }, [slides.length]);
+
   return (
     <section className="relative flex min-h-screen items-center overflow-hidden text-white">
-      <div className="absolute inset-0 motion-safe:animate-[ami-kenburns_22s_ease-in-out_infinite_alternate]">
-        <Image
-          src={images.hero.home.src}
-          alt={images.hero.home.alt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-      </div>
+      {slides.map((slide, i) => (
+        <div
+          key={slide.src}
+          aria-hidden={i !== active}
+          className="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+          style={{ opacity: i === active ? 1 : 0 }}
+        >
+          <div className="absolute inset-0 motion-safe:animate-[ami-kenburns_22s_ease-in-out_infinite_alternate]">
+            <Image
+              src={slide.src}
+              alt={slide.alt}
+              fill
+              priority={i === 0}
+              sizes="100vw"
+              className="object-cover"
+            />
+          </div>
+        </div>
+      ))}
       <div
         className="absolute inset-0"
         style={{
@@ -137,6 +159,27 @@ export function HomeHero() {
           }}
         />
       </motion.div>
+
+      <div className="absolute bottom-[34px] right-6 z-10 flex items-center gap-2.5 sm:right-8">
+        {slides.map((slide, i) => (
+          <button
+            key={slide.src}
+            type="button"
+            onClick={() => setActive(i)}
+            aria-label={`Show slide ${i + 1} of ${slides.length}`}
+            aria-current={i === active}
+            className="p-1.5"
+          >
+            <span
+              className="block h-1.5 rounded-full transition-all duration-300"
+              style={{
+                width: i === active ? "22px" : "7px",
+                background: i === active ? "#ffffff" : "rgba(255,255,255,.4)",
+              }}
+            />
+          </button>
+        ))}
+      </div>
     </section>
   );
 }

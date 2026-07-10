@@ -53,10 +53,7 @@ export const mainNav: NavItem[] = [
           { label: "Compliance", href: "/compliance" },
         ],
       ],
-      image: {
-        src: images.hero.home.src,
-        alt: "Elevated conveyor bridges at an AD Meliora mineral-processing site",
-      },
+      image: images.hero.homeCarousel[0],
     },
   },
   {
