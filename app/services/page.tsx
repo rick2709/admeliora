@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Services",
   description:
-    "Architecture & engineering, planning, construction & field services, operations & maintenance, water treatment plant O&M, and EPCM project management.",
+    "Architecture & engineering, planning, construction & field services, operations & maintenance, water and wastewater treatment plant O&M, EPCM project management, and facilities management.",
 };
 
 export default function ServicesPage() {

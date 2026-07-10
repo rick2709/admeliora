@@ -173,6 +173,7 @@ export function ContactForm() {
                 {s.title}
               </option>
             ))}
+            <option value="Other">Other</option>
           </select>
           <AnimatePresence>
             {errors.sector && (
@@ -206,6 +207,7 @@ export function ContactForm() {
               </option>
             ))}
             <option value="Industrial & Hardware Supplies">Industrial & Hardware Supplies</option>
+            <option value="Other">Other</option>
           </select>
           <AnimatePresence>
             {errors.service && (

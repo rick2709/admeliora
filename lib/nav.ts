@@ -69,7 +69,7 @@ export const mainNav: NavItem[] = [
           href: "/services#operations-maintenance",
         },
         {
-          title: "Water Treatment O&M",
+          title: "Water and Wastewater Treatment O&M",
           description: "SCADA-monitored potable water",
           href: "/services#water-treatment",
         },
@@ -89,7 +89,7 @@ export const mainNav: NavItem[] = [
   { label: "Products", href: "/products" },
   { label: "Sectors", href: "/sectors" },
   { label: "Projects", href: "/projects" },
-  { label: "Contact", href: "/contact" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 export const bottomNavItems = [
@@ -109,7 +109,7 @@ export const footerLinks = {
   ],
   services: [
     { label: "Engineering & O&M", href: "/services#operations-maintenance" },
-    { label: "Water Treatment", href: "/services#water-treatment" },
+    { label: "Water and Wastewater Treatment", href: "/services#water-treatment" },
     { label: "Project Management", href: "/services#project-management" },
     { label: "Industrial Supplies", href: "/products" },
   ],

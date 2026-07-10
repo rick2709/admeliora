@@ -20,9 +20,9 @@ export const homeHubs: Hub[] = [
   },
   {
     id: "water",
-    title: "Water Treatment Plant O&M",
+    title: "Water and Wastewater Treatment Plant O&M",
     description:
-      "Filtration, dosing, UV and SCADA-monitored potable water systems, operated to spec.",
+      "Filtration, dosing, UV and SCADA-monitored potable water and wastewater systems, operated to spec.",
     href: "/services#water-treatment",
     image: images.water.treatmentPlant,
     badge: "Differentiator",

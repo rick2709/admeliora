@@ -64,14 +64,14 @@ export const services: Service[] = [
   },
   {
     id: "water-treatment",
-    title: "Water Treatment Plant Operation & Maintenance",
+    title: "Water and Wastewater Treatment Plant Operation & Maintenance",
     summary:
-      "Our key differentiator — filtration, dosing, UV disinfection and SCADA-monitored potable water systems, operated and maintained end-to-end.",
+      "Our key differentiator — filtration, dosing, UV disinfection and SCADA-monitored potable water and wastewater systems, operated and maintained end-to-end.",
     points: [
       "Filtration systems",
       "Chemical dosing",
       "UV disinfection",
-      "SCADA-monitored potable water systems",
+      "SCADA-monitored water & wastewater systems",
     ],
     image: images.water.treatmentPlant,
     highlighted: true,
@@ -88,6 +88,19 @@ export const services: Service[] = [
       "Cost control",
     ],
     image: images.roofing.rollForming,
+  },
+  {
+    id: "facilities-management",
+    title: "Facilities Management",
+    summary:
+      "End-to-end upkeep of buildings and industrial facilities — routine maintenance, MEP services and vendor coordination under one roof.",
+    points: [
+      "Building & facility maintenance",
+      "Mechanical, electrical & plumbing upkeep",
+      "Grounds & janitorial services",
+      "Vendor & contractor management",
+    ],
+    image: images.plant.steelworks,
   },
 ];
 
