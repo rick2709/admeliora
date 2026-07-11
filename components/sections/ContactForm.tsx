@@ -2,9 +2,10 @@
 
 import { useState, type FormEvent } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, Loader2 } from "lucide-react";
+import { CheckCircle2 } from "lucide-react";
 import { sectors } from "@/lib/sectors";
 import { services } from "@/lib/services";
+import { siteConfig } from "@/lib/site";
 
 type FormState = {
   name: string;
@@ -27,7 +28,7 @@ type Errors = Partial<Record<keyof FormState, string>>;
 export function ContactForm() {
   const [form, setForm] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<Errors>({});
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [status, setStatus] = useState<"idle" | "success">("idle");
 
   const validate = (): Errors => {
     const next: Errors = {};
@@ -40,18 +41,25 @@ export function ContactForm() {
     return next;
   };
 
-  const handleSubmit = async (e: FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length > 0) return;
 
-    setStatus("submitting");
+    const subject = `Website enquiry from ${form.name}`;
+    const body = [
+      `Name: ${form.name}`,
+      `Company / Organisation: ${form.company}`,
+      `Sector: ${form.sector}`,
+      `Service of interest: ${form.service}`,
+      "",
+      "Message:",
+      form.message,
+    ].join("\n");
 
-    // TODO: wire this up to a real endpoint — e.g. a Formspree form action,
-    // or a Next.js Route Handler at /api/contact that sends via your email
-    // provider (Resend, SendGrid, etc). This placeholder simulates a submit.
-    await new Promise((resolve) => setTimeout(resolve, 900));
+    const mailto = `mailto:${siteConfig.emails[0].address}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
 
     setStatus("success");
     setForm(initialState);
@@ -75,17 +83,18 @@ export function ContactForm() {
         >
           <CheckCircle2 size={52} className="text-accent" />
         </motion.div>
-        <h3 className="mt-5 font-heading text-xl font-bold text-navy">Enquiry sent</h3>
+        <h3 className="mt-5 font-heading text-xl font-bold text-navy">Almost done</h3>
         <p className="mt-2 max-w-sm text-sm text-steel">
-          Thank you — a member of our team will be in touch shortly. For urgent
-          enquiries, call or WhatsApp us directly.
+          Your email app should have opened with your enquiry pre-filled — just
+          hit send there to reach our team. For urgent enquiries, call or
+          WhatsApp us directly.
         </p>
         <button
           type="button"
           onClick={() => setStatus("idle")}
           className="mt-6 text-sm font-semibold text-accent hover:text-mid-blue"
         >
-          Send another enquiry
+          Back to form
         </button>
       </motion.div>
     );
@@ -252,11 +261,9 @@ export function ContactForm() {
 
       <button
         type="submit"
-        disabled={status === "submitting"}
-        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-accent-light disabled:opacity-70 sm:w-auto"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-accent px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-accent-light sm:w-auto"
       >
-        {status === "submitting" && <Loader2 size={16} className="animate-spin" />}
-        {status === "submitting" ? "Sending..." : "Send enquiry"}
+        Send enquiry
       </button>
     </form>
   );

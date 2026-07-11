@@ -39,6 +39,7 @@ const photo = {
   pumpStation: local("pump-station-grundfos.jpg"),
   pumphouseMetering: local("water-pumphouse-metering.jpg"),
   gearsCloseup: local("mechanical-gears-closeup.jpg"),
+  facilitiesManagement: local("facilities-management-tech.png"),
 };
 
 export const images = {
@@ -125,6 +126,13 @@ export const images = {
     switchgear: {
       src: photo.waterScada,
       alt: "Control screen and instrumentation panel for plant monitoring",
+    } satisfies SiteImage,
+  },
+
+  facilities: {
+    management: {
+      src: photo.facilitiesManagement,
+      alt: "Facilities manager reviewing building systems on a tablet",
     } satisfies SiteImage,
   },
 

@@ -100,7 +100,7 @@ export const services: Service[] = [
       "Grounds & janitorial services",
       "Vendor & contractor management",
     ],
-    image: images.plant.steelworks,
+    image: images.facilities.management,
   },
 ];
 

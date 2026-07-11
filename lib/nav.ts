@@ -51,6 +51,7 @@ export const mainNav: NavItem[] = [
           { label: "Governance & Ethics", href: "/compliance#governance" },
           { label: "HSE Policy", href: "/compliance#hse" },
           { label: "Compliance", href: "/compliance" },
+          { label: "Careers", href: "/careers" },
         ],
       ],
       image: images.hero.homeCarousel[0],
@@ -106,6 +107,7 @@ export const footerLinks = {
     { label: "What We Do", href: "/services" },
     { label: "Compliance", href: "/compliance" },
     { label: "Projects", href: "/projects" },
+    { label: "Careers", href: "/careers" },
   ],
   services: [
     { label: "Engineering & O&M", href: "/services#operations-maintenance" },
