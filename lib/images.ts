@@ -93,7 +93,7 @@ export const images = {
       alt: "Multi-level industrial steel structure with pipe racks and walkways",
     } satisfies SiteImage,
     projects: {
-      src: unsplash("photo-1590959651373-a3db0f38c961", 1600),
+      src: unsplash("photo-1541888946425-d81bb19240f5", 1600),
       alt: "Construction crane on an active AD Meliora project site",
     } satisfies SiteImage,
     compliance: {
@@ -242,7 +242,7 @@ export const images = {
 
   construction: {
     crane: {
-      src: unsplash("photo-1590959651373-a3db0f38c961", 1600),
+      src: unsplash("photo-1541888946425-d81bb19240f5", 1600),
       alt: "Construction crane on an active site",
     } satisfies SiteImage,
     ppeEngineers: {
