@@ -38,6 +38,7 @@ const photo = {
   roPlant: local("water-treatment-ro-plant.jpg"),
   pumpStation: local("pump-station-grundfos.jpg"),
   pumphouseMetering: local("water-pumphouse-metering.jpg"),
+  pumpRoom: local("water-treatment-pump-room.jpg"),
   gearsCloseup: local("mechanical-gears-closeup.jpg"),
   facilitiesManagement: local("facilities-management-tech.png"),
 };
@@ -93,8 +94,8 @@ export const images = {
       alt: "Multi-level industrial steel structure with pipe racks and walkways",
     } satisfies SiteImage,
     projects: {
-      src: unsplash("photo-1541888946425-d81bb19240f5", 1600),
-      alt: "Construction crane on an active AD Meliora project site",
+      src: photo.pumpRoom,
+      alt: "Water treatment pump room with industrial pumps and pipework at an AD Meliora client site",
     } satisfies SiteImage,
     compliance: {
       src: photo.staffBanner,
