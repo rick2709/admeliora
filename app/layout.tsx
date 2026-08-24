@@ -5,7 +5,6 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import MobileBottomNav from "@/components/layout/MobileBottomNav";
 import WhatsAppFloatButton from "@/components/layout/WhatsAppFloatButton";
-import { PageTransition } from "@/components/layout/PageTransition";
 import { siteConfig } from "@/lib/site";
 
 const sora = Sora({
@@ -74,7 +73,7 @@ export default function RootLayout({
         </a>
         <Header />
         <main id="main-content" className="flex-1 pb-16 md:pb-0">
-          <PageTransition>{children}</PageTransition>
+          {children}
         </main>
         <Footer />
         <MobileBottomNav />
