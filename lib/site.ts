@@ -6,7 +6,7 @@ export const siteConfig = {
   positioning: "Engineering, Operations & Maintenance",
   description:
     "AD Meliora Investments (AMI) is a Zimbabwean engineering, operations & maintenance, and industrial-supplies company delivering full project lifecycle solutions — from concept to running asset — for government, corporate, and industrial clients.",
-  url: "https://www.admeliorazw.com",
+  url: "https://www.admelioragroup.com",
   ogImage: "/images/plant-pipework-overview.jpg",
   phones: [
     { label: "Primary", number: "+263 77 941 4157", href: "tel:+263779414157" },
@@ -16,7 +16,7 @@ export const siteConfig = {
     number: "263779414157",
     href: "https://wa.me/263779414157",
   },
-  emails: [{ label: "General", address: "admeliora@admeliorazw.com" }],
+  emails: [{ label: "General", address: "admeliora@admelioragroup.com" }],
   address: {
     line1: "1070 Tynwald South Industry",
     city: "Harare",

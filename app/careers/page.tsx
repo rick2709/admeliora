@@ -9,7 +9,7 @@ import { capacityPoints } from "@/lib/company";
 export const metadata: Metadata = {
   title: "Careers",
   description:
-    "Join AD Meliora Investments — email your CV to admeliora@admeliorazw.com to be considered for engineering, operations & maintenance, and industrial-supplies roles.",
+    "Join AD Meliora Investments — email your CV to admeliora@admelioragroup.com to be considered for engineering, operations & maintenance, and industrial-supplies roles.",
 };
 
 export default function CareersPage() {
