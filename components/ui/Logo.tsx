@@ -18,8 +18,8 @@ export function Logo({ className, variant = "dark", showWordmark = true }: LogoP
       <Image
         src={iconSrc}
         alt="AD Meliora Investments logo mark"
-        width={408}
-        height={290}
+        width={640}
+        height={486}
         className="h-9 w-auto shrink-0 sm:h-10"
         priority
       />

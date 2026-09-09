@@ -23,7 +23,6 @@ const local = (file: string) => `/images/${file}`;
 
 // Real AD Meliora photography (public/images/*)
 const photo = {
-  logo: local("logo-ami.jpg"),
   staffBanner: local("company-banner-staff.jpg"),
   pickup: local("branded-vehicle-pickup.jpg"),
   truck: local("branded-vehicle-truck.jpg"),
