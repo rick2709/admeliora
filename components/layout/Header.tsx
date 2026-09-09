@@ -13,7 +13,6 @@ import { MobileMenuButton } from "@/components/layout/MobileMenuButton";
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [suppressHover, setSuppressHover] = useState(false);
   const pathname = usePathname();
@@ -43,38 +42,25 @@ export default function Header() {
     const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll, { passive: true });
 
-    const mq = window.matchMedia("(max-width: 767px)");
-    const onMq = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mq.addEventListener("change", onMq);
-
-    // Sync initial state from the browser APIs once mounted — no SSR equivalent exists
-    // for scroll position or matchMedia, so this one-time post-mount sync is intentional.
+    // Sync initial scroll state from the browser API once mounted — no SSR
+    // equivalent exists for scroll position, so this one-time post-mount
+    // sync is intentional.
     onScroll();
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setIsMobile(mq.matches);
 
-    return () => {
-      window.removeEventListener("scroll", onScroll);
-      mq.removeEventListener("change", onMq);
-    };
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
-
-  const isSolid = scrolled || isMobile;
 
   return (
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50 flex items-stretch transition-[height,background-color,box-shadow,border-color] duration-[350ms] ease-out",
-          scrolled ? "h-[132px]" : "h-[152px]",
-          isSolid
-            ? "border-b border-navy/10 bg-white/92 shadow-[0_6px_24px_-12px_rgba(11,33,73,0.35)] backdrop-blur-lg backdrop-saturate-150"
-            : "border-b border-transparent bg-transparent"
+          "fixed inset-x-0 top-0 z-50 flex items-stretch border-b border-navy/10 bg-white/92 shadow-[0_6px_24px_-12px_rgba(11,33,73,0.35)] backdrop-blur-lg backdrop-saturate-150 transition-[height] duration-[350ms] ease-out",
+          scrolled ? "h-[108px]" : "h-[124px]"
         )}
       >
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 sm:px-8">
           <Link href="/" aria-label="AD Meliora home" className="shrink-0">
-            <Logo height={scrolled ? 84 : 96} />
+            <Logo height={scrolled ? 84 : 96} card={false} />
           </Link>
 
           <nav
@@ -98,10 +84,7 @@ export default function Header() {
                 <div key={item.label} className="group static flex h-full items-center">
                   <button
                     type="button"
-                    className={cn(
-                      "nav-underline flex items-center gap-1 font-heading text-sm font-semibold tracking-wide",
-                      isSolid ? "text-navy" : "text-white"
-                    )}
+                    className="nav-underline flex items-center gap-1 font-heading text-sm font-semibold tracking-wide text-navy"
                     aria-haspopup="true"
                   >
                     {item.label}
@@ -173,10 +156,7 @@ export default function Header() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className={cn(
-                    "nav-underline font-heading text-sm font-semibold tracking-wide whitespace-nowrap",
-                    isSolid ? "text-navy" : "text-white"
-                  )}
+                  className="nav-underline font-heading text-sm font-semibold tracking-wide whitespace-nowrap text-navy"
                 >
                   {item.label}
                 </Link>
@@ -196,7 +176,7 @@ export default function Header() {
           <MobileMenuButton
             open={mobileOpen}
             onClick={() => setMobileOpen((v) => !v)}
-            dark={isSolid}
+            dark
           />
         </div>
       </header>

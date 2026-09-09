@@ -26,7 +26,7 @@ export function PageHero({ eyebrow, title, description, image }: PageHeroProps) 
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-navy-dark via-navy-dark/75 to-navy-dark/30" />
 
-      <div className="relative mx-auto w-full max-w-7xl px-6 pb-16 pt-[218px] sm:px-8">
+      <div className="relative mx-auto w-full max-w-7xl px-6 pb-16 pt-[190px] sm:px-8">
         <motion.p
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
