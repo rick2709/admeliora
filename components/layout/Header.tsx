@@ -66,7 +66,7 @@ export default function Header() {
       <header
         className={cn(
           "fixed inset-x-0 top-0 z-50 flex items-stretch transition-[height,background-color,box-shadow,border-color] duration-[350ms] ease-out",
-          scrolled ? "h-[112px]" : "h-[128px]",
+          scrolled ? "h-[132px]" : "h-[152px]",
           isSolid
             ? "border-b border-navy/10 bg-white/92 shadow-[0_6px_24px_-12px_rgba(11,33,73,0.35)] backdrop-blur-lg backdrop-saturate-150"
             : "border-b border-transparent bg-transparent"
@@ -74,7 +74,7 @@ export default function Header() {
       >
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 sm:px-8">
           <Link href="/" aria-label="AD Meliora home" className="shrink-0">
-            <Logo variant={isSolid ? "dark" : "light"} height={scrolled ? 88 : 100} />
+            <Logo height={scrolled ? 84 : 96} />
           </Link>
 
           <nav
