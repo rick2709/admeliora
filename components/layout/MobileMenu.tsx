@@ -44,7 +44,7 @@ export function MobileMenu({ open, onClose }: MobileMenuProps) {
           className="fixed inset-0 z-[1100] flex flex-col bg-navy md:hidden"
         >
           <div className="flex h-[60px] items-center justify-between px-[22px]">
-            <Logo variant="light" showWordmark={false} />
+            <Logo variant="light" />
             <button
               type="button"
               aria-label="Close menu"

@@ -69,7 +69,7 @@ export function HomeHero() {
         style={{ background: "linear-gradient(to top, rgba(11,33,73,.9), transparent 40%)" }}
       />
 
-      <div className="relative mx-auto w-full max-w-7xl px-6 pb-[130px] pt-[120px] sm:px-8">
+      <div className="relative mx-auto w-full max-w-7xl px-6 pb-[130px] pt-[170px] sm:px-8">
         <motion.div
           initial={{ opacity: 0, y: 26 }}
           animate={{ opacity: 1, y: 0 }}

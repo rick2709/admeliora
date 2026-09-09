@@ -33,7 +33,7 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-6 sm:px-8 py-16">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
           <div>
-            <Logo variant="light" />
+            <Logo variant="light" height={150} />
             <p className="mt-5 max-w-xs text-sm text-white/60">{siteConfig.description}</p>
             <p className="mt-6 font-heading text-xl font-bold text-accent-light">
               {siteConfig.tagline.replace(/\.$/, "")}!
